@@ -58,7 +58,7 @@ async def checkIsValid(created_time:str, current_time:float, valid_time:int) -> 
     date = datetime.datetime.strptime(created_time, '%Y-%m-%dT%H:%M:%S+00:00')
     created_at = time.mktime(date.timetuple())
 
-    print("diff: ", (current_time - (created_at + valid_time)) // 3600)
+    # print("diff: ", (current_time - (created_at + valid_time)) // 3600)
     if created_at + valid_time < current_time: # user is not valid
         return True
     else: # user is still valid
