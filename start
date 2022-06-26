@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ -z $1 ]
+then
+    echo "Please enter the validation time of access keys"
+else
+    echo "Start detecting invalid aws access keys."
+    echo "Detecting keys older than $1 hours"
+
+    python3 main.py $1
+fi
