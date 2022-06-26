@@ -15,4 +15,5 @@ run 'start' script in the root. with valid_time argument like below.
 
 **Prerequisite**
 
-To run this program, proper aws account access key and secret should be setup on the environment. 
+1. To run this program, proper aws account access key and secret should be setup on the environment. 
+2. run **./setup** script to install all prerequisite python libraries
