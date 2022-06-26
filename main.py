@@ -40,20 +40,20 @@ async def getAwsAccessKeys(userName) -> str:
     return output.decode()
 
 
-
+# get access key list per user and arranging them in the dictionary
 async def arrangeUserAccessKeyData(user_map, userName:str, current_time:float, valid_time:int):
+    # request access key list assigned to {userName}
     keys = json.loads(await getAwsAccessKeys(userName))
 
+    # iterate access keys and check if it is valid.
     for key in keys["AccessKeyMetadata"]:
         if await checkIsValid(key["CreateDate"], current_time, valid_time):
-            # print(key, "True")
             user_map[key["UserName"]]["UserName"] = key["UserName"]
             user_map[key["UserName"]]["AccessKeyId"] = key["AccessKeyId"]
             user_map[key["UserName"]]["CreateDate"] = key["CreateDate"]
-        # else:
-        #     print(key, "False")
 
 
+# check if create_time + valid_time is older than current_time
 async def checkIsValid(created_time:str, current_time:float, valid_time:int) -> bool:
     date = datetime.datetime.strptime(created_time, '%Y-%m-%dT%H:%M:%S+00:00')
     created_at = time.mktime(date.timetuple())
@@ -82,7 +82,7 @@ async def detectInvalidUserkey(valid_time:int):
     # get access keys per user and arrange them in 'user_data' dictionary
     for user in users["Users"]:
         tasks.append(arrangeUserAccessKeyData(user_data, user["UserName"], current_time, valid_time))
-
+    # running the tasks asynchronously
     await asyncio.gather(*tasks)
 
     # write result(user_data) on the file
