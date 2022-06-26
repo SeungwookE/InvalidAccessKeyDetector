@@ -1,6 +1,11 @@
 # InvalidAccessKeyDetector
 invalide access key detector using aws cli
 
+basically using two aws iam command
+
+- aws iam get-users
+- aws iam list-access-keys --user-name {userName}
+
 
 **How to use?**
 
