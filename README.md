@@ -11,3 +11,8 @@ run 'start' script in the root. with valid_time argument like below.
 > (Detect access keys older than 3000 hours after creation / 생성 후 3000 시간이 지난 access key 검출)
 
 위 커맨드 실행의 결과로 동일한 프로젝트 root 내에 invalid_access_keys.txt 파일이 생성됩니다.
+
+
+**Prerequisite**
+
+To run this program, proper aws account access key and secret should be setup on the environment. 
